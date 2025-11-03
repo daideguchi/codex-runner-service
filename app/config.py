@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     slack_channel_id: str = Field(..., env="SLACK_CHANNEL_ID")
     github_repo: str = Field(..., env="GITHUB_REPO")
     github_token: str = Field(..., env="GITHUB_TOKEN")
-    state_file: Path = Field(default=Path("/var/data/codex-runner/state.json"), env="STATE_FILE")
+    state_file: Path = Field(default=Path("state/state.json"), env="STATE_FILE")
     poll_interval_seconds: int = Field(default=120, env="POLL_INTERVAL_SECONDS")
     log_level: str = Field(default="INFO", env="LOG_LEVEL")
 
