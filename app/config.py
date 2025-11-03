@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
-from typing import Optional
 
-from pydantic import BaseSettings, Field, validator
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     poll_interval_seconds: int = Field(default=120, env="POLL_INTERVAL_SECONDS")
     log_level: str = Field(default="INFO", env="LOG_LEVEL")
 
-    @validator("poll_interval_seconds")
+    @field_validator("poll_interval_seconds")
     def _positive_interval(cls, value: int) -> int:
         if value < 30:
             raise ValueError("poll_interval_seconds must be >= 30 seconds to avoid rate limiting")
